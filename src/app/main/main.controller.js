@@ -9,7 +9,7 @@
     var $timeout;
 
     /** @ngInject */
-    function MainController(_$timeout_, $http, ThingService, EchoService) {
+    function MainController(_$timeout_, $http, ThingService, EchoService, Fibonacci) {
         $timeout = _$timeout_;
         var self = this;
         self.newThing = {};
@@ -19,6 +19,10 @@
         })
         
         
+        self.update = "fibonacci: "
+        Fibonacci.calculate(17000).then(console.log, console.error, function (update) {
+            self.update += update + ", ";
+        })
         // EchoService.shout("some message!").then(function(response){
         //     console.log(response);
         // }, function(response){
@@ -57,64 +61,3 @@
 
 
 
-
-
-
-
-// EchoService.shout("Hey!").then(console.log, console.error)
-
-
-
-        // self.update = "fibonacci: "
-        // Fibonacci.calculate(17000).then(console.log, console.error, function (update) {
-        //     self.update += update + ", ";
-        // })
-
-
-
-
-
-
-// 
-// .factory('Fibonacci', function ($q, $timeout) {
-// 
-//             function fibonacci(n) {
-//                 if (n == 1) return 1
-//                 else return n + fibonacci(n - 1)
-//             }
-// 
-//             function promiseFibonacci(a) {
-//                 var defer = $q.defer();
-//                 $timeout(function () {
-//                     function fibonacci(n) {
-//                         defer.notify(n);
-//                         if (n == 1) return 1
-//                         else return n + fibonacci(n - 1)
-//                     }
-//                     var result;
-//                     try {
-//                         result = fibonacci(a);
-//                         defer.resolve(result);
-//                     } catch (e) {
-//                         defer.reject('We encoutered a problem, be aware calculation is limited to !15 000');
-//                     }
-//                 }, 100)
-//                 return defer.promise;
-//             }
-// 
-//             return {
-//                 calculate: function calculate(n) {
-//                     // return $q(function (success, fail) {
-//                     //     var r;
-//                     //     try{
-//                     //         r = fibonacci(n);
-//                     //         success(r);
-//                     //     }catch(e){
-//                     //         fail('We encoutered a problem, be aware calculation is limited to !15 000');                                    
-//                     //     }
-//                     // });
-//                     return promiseFibonacci(n);
-// 
-//                 }
-//             }
-//         });
