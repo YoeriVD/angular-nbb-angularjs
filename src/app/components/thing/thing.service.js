@@ -1,6 +1,6 @@
 (function () {
     //service
-    function ThingService($http) {
+    function ThingService($http) { //this function is the constructor of the service
         this.get = function () {
             return $http.get('assets/things.json').then(function (response) {
                 return response.data;

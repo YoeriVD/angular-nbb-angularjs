@@ -1,6 +1,25 @@
 describe('echoservice', function () {
 
 
+    var EchoService, $timeout;
+
+    beforeEach(function(){
+        module('demoApp.services')
+        inject(function(_EchoService_, _$timeout_){
+            EchoService = _EchoService_;
+            $timeout = _$timeout_
+        })
+    })
+
+
+    it('should reply with the same message when the timeout expires', function(){
+        var result;
+        EchoService.shout('test').then(function(response){
+            result = response;
+        })
+        $timeout.flush();
+        expect(result).toBe('test');        
+    })
 
 })
 

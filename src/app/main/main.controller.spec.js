@@ -1,27 +1,29 @@
-xdescribe('Controller : Main', function () {
+describe('Controller : Main', function () {
 
-    var $controller, ThingService;
-
-    var thing = {
-        title: 'test'
-    }
+    var $controller, ThingService, $q, $rootScope;
 
     beforeEach(function () {
         module('demoApp');
-        inject(function (_$controller_, _ThingService_) {
+        inject(function (_$controller_, _ThingService_, _$q_, _$rootScope_) {
             $controller = _$controller_;
             ThingService = _ThingService_;
-            spyOn(ThingService, 'get').and.callFake(function () {
-                //return an object that looks like a promise
-                return { then: function (fn) { fn([thing]) } };
-            })            
+            $q = _$q_; 
+            $rootScope = _$rootScope_;         
         })
     })
 
 
     it("should get a list from the server", function () {
+        var defer = $q.defer();
+        spyOn(ThingService, 'get').and.returnValue(defer.promise)
 
         var controller = $controller('MainController');
+        
+        var listOfThings = [{ title : 'a thing'}]
+        
+        defer.resolve(listOfThings);
+        
+        $rootScope.$digest();
         
         expect(controller.coolThings.length).toBe(1);
     })

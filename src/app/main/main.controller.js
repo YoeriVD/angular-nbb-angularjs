@@ -9,7 +9,7 @@
     var $timeout;
 
     /** @ngInject */
-    function MainController(_$timeout_, $http, ThingService) {
+    function MainController(_$timeout_, $http, ThingService, EchoService) {
         $timeout = _$timeout_;
         var self = this;
         self.newThing = {};
@@ -17,6 +17,14 @@
         ThingService.get().then(function(things){
             self.coolThings = things;
         })
+        
+        
+        // EchoService.shout("some message!").then(function(response){
+        //     console.log(response);
+        // }, function(response){
+        //     console.error(response)
+        // })
+        
         
     }
     MainController.prototype.hideThing = function (thing) {
