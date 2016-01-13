@@ -1,0 +1,38 @@
+<div class="container jumbotron">
+
+
+    <h2>my awesome application</h2>
+    <p>
+        <input type="text" ng-model="main.message" />
+        <alert message="main.message"></alert>
+    </p>
+    <p>{{ main.update }}</p>
+
+    <button ng-click="main.isLoading = !main.isLoading"> change loading </button>
+
+    <loading is-loading="main.isLoading"></loading>
+
+    <!--<input type="text" ng-model="main.test" />-->
+    <form ng-submit="main.saveThing()" novalidate name="main.form">
+        <p>Title:
+            <input type="text" ng-model="main.newThing.title" ng-required="true">
+        </p>
+        <p>Price:
+            <input type="number" ng-model="main.newThing.price">
+        </p>
+        <p>Date:
+            <input type="date" ng-model="main.newThing.creationDate">
+        </p>
+        <p>
+            <input type="submit" value="save" ng-disabled="main.form.$invalid">
+        </p>
+    </form>
+
+    <p>list of cool things:</p>
+    <ul>
+        <li ng-repeat="thing in main.coolThings" ng-hide="thing.hidden">
+            {{ thing.title }} | {{ thing.price | euro }} | {{thing.creationDate | date : 'dd-MMMM-yyyy' }} <a ng-click="main.hideThing(thing)">hide</a>
+        </li>
+    </ul>
+    {{ main.coolThings | json }}
+</div>

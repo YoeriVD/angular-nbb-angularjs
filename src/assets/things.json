@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Angular2",
+        "price": 10.3,
+        "creationDate": "2016-01-11T21:46:48.137Z"
+    },
+    {
+        "title": "coffee with milk",
+        "price": 1.3,
+        "creationDate": "2014-05-31T22:00:00.000Z"
+    },
+    {
+        "title": "Apple (the fruit)",
+        "price": 2.3,
+        "creationDate": "2016-01-11T21:46:48.137Z"
+    }
+]
